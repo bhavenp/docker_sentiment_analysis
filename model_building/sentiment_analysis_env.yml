@@ -1,0 +1,11 @@
+name: sentiment_analysis_env
+dependencies:
+  - python=3.6
+  - pyyaml
+  - numpy
+  - pandas
+  - scikit-learn
+  - flask
+  - gunicorn
+  - tensorflow-hub
+  - tensorflow-datasets
