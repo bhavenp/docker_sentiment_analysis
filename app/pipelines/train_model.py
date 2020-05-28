@@ -1,4 +1,6 @@
-import os
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))); # so I can load utils
+
 import re
 from pathlib import Path
 #import logging
@@ -11,7 +13,8 @@ import tensorflow as tf
 import tensorflow_hub as hub
 import tensorflow_datasets as tfds
 
-from util.utils import load_yaml#, initialize_logging
+from utils import load_yaml#, initialize_logging
+
 
 # get configurations for model
 DEFAULT_CONFIG_PATH = "./default_settings.yml" 
@@ -46,9 +49,9 @@ def run_pipeline():
     # Model
     model = tf.keras.Sequential();
     model.add(hub_layer);
-    for _ in range(config['model']['params']['hidden_layers']):
+    for _ in range(config_train['model']['params']['hidden_layers']):
         model.add(tf.keras.layers.Dense(
-            config['model']['params']['hidden_units'],
+            config_train['model']['params']['hidden_units'],
             activation='relu'));
     # add output layer
     model.add(tf.keras.layers.Dense(1, activation='sigmoid'));
@@ -59,7 +62,7 @@ def run_pipeline():
 
     # Train
     history = model.fit(train_data.shuffle(10000).batch(512),
-                    epochs=config['model']['params']['num_epochs'],
+                    epochs=config_train['model']['params']['num_epochs'],
                     validation_data=validation_data.batch(512),
                     verbose=1)
     # Test
@@ -70,8 +73,8 @@ def run_pipeline():
         print("%s: %.3f" % (name, value));
 
     # Save
-    model_name = config["model"]["name"]
-    #save_path = os.path.join(config["experiment"]["output_dirname"], f"{model_name}.keras")
+    model_name = config_train["model"]["name"]
+    #save_path = os.path.join(config_train["experiment"]["output_dirname"], f"{model_name}.keras")
     save_path = os.path.join('./', f"{model_name}.keras");
     model.save(save_path)
     # logger.info(f"Saved keras pipeline model at {save_path}")
