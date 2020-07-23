@@ -3,7 +3,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))); #
 
 import re
 from pathlib import Path
-#import logging
+import logging
 #import joblib
 
 import numpy as np
@@ -13,23 +13,11 @@ import tensorflow as tf
 import tensorflow_hub as hub
 import tensorflow_datasets as tfds
 
-from utils import load_yaml#, initialize_logging
+from utils import load_yaml
 
 
-# get configurations for model
-DEFAULT_CONFIG_PATH = "./default_settings.yml" 
-config = load_yaml(DEFAULT_CONFIG_PATH)
-config_train = config["train"];
-print("Loaded configuration settings");
 
-# logger = logging.getLogger(__name__)
-# log_config_path = config["logging"]["config_path"]
-# initialize_logging(config_path=log_config_path)
-
-# This example is taken from:
-# https://www.tensorflow.org/tutorials/keras/text_classification_with_hub
-
-def run_pipeline():
+def run_training_pipeline(config_model, logger):
     """ runs pipeline to train keras Dense NN model for sentiment classification """
 
     # Split the training set into 60% and 40%, so we'll end up with 15,000 examples
@@ -47,35 +35,36 @@ def run_pipeline():
                                dtype=tf.string, trainable=True)
 
     # Model
-    model = tf.keras.Sequential();
-    model.add(hub_layer);
-    for _ in range(config_train['model']['params']['hidden_layers']):
+    print("Creating model")
+    model = tf.keras.Sequential()
+    model.add(hub_layer)
+    for _ in range(config_model['params']['hidden_layers']):
         model.add(tf.keras.layers.Dense(
-            config_train['model']['params']['hidden_units'],
-            activation='relu'));
+            config_model['params']['hidden_units'],
+            activation='relu'))
     # add output layer
-    model.add(tf.keras.layers.Dense(1, activation='sigmoid'));
+    model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
     # Compilation
     model.compile(optimizer='adam', loss='binary_crossentropy',
-        metrics=['accuracy']);
+        metrics=['accuracy'])
 
     # Train
     history = model.fit(train_data.shuffle(10000).batch(512),
-                    epochs=config_train['model']['params']['num_epochs'],
+                    epochs=config_model['params']['num_epochs'],
                     validation_data=validation_data.batch(512),
                     verbose=1)
     # Test
     results = model.evaluate(test_data.batch(512), verbose=2);
 
     for name, value in zip(model.metrics_names, results):
-        #logger.info("%s: %.3f" % (name, value))
+        logger.info("%s: %.3f" % (name, value))
         print("%s: %.3f" % (name, value));
 
-    # Save
-    model_name = config_train["model"]["name"]
-    #save_path = os.path.join(config_train["experiment"]["output_dirname"], f"{model_name}.keras")
-    save_path = os.path.join('./', f"{model_name}.keras");
+    # Save model
+    model_name = config_model["name"]
+    save_path = os.path.join("./models", f"{model_name}.keras")
+    logger.(save_path)
     model.save(save_path)
     # logger.info(f"Saved keras pipeline model at {save_path}")
 
@@ -93,4 +82,26 @@ def load_keras_hub_model(save_path):
     )
 
 if __name__ == "__main__":
-    run_pipeline()
+    # get configurations for model
+    DEFAULT_SETTINGS = "default_settings.yml"
+    config = load_yaml(DEFAULT_SETTINGS)
+    config_model = config['model']
+
+    # start up a logger
+    fmtStr = "%(asctime)s: %(levelname)s: %(funcName)s Line:%(lineno)d Message: %(message)s"
+    dateStr = "%m/%d/%Y %H:%M:%S"
+    logging.basicConfig(filename=config['logging']['config_path'],
+                        level=logging.DEBUG,
+                        filemode='w',
+                        format=fmtStr,
+                        datefmt=dateStr)
+    logger = logging.getLogger("training_model") # create a logger object
+    print("Loaded configuration settings.")
+    logger.info("Model name: {0}".format(config_model['name']))
+    logger.info("Model params: hidden_units={0}, hidden_layers={1}, num_epochs={2}".format(
+        config_model['params']["hidden_units"], 
+        config_model['params']["hidden_layers"], 
+        config_model['params']["num_epochs"]) )
+
+
+    run_training_pipeline(config_model, logger)
