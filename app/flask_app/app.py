@@ -2,7 +2,7 @@
 
 from flask import Flask, request, jsonify
 
-# from ml_deploy_demo.predict import predict_online
+from predict import predict_online
 # from ml_deploy_demo.util.utils import initialize_logging
 
 # logger = logging.getLogger(__name__)
