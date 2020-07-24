@@ -1,7 +1,3 @@
-07/24/2020 12:20:42: INFO: <module> Line:48 Message: Opened port 5000 .
-07/24/2020 12:20:42: WARNING: _log Line:113 Message:  * Debugger is active!
-07/24/2020 12:20:42: INFO: _log Line:113 Message:  * Debugger PIN: 242-655-083
-07/24/2020 12:20:47: INFO: home Line:26 Message: Request made to home.
-07/24/2020 12:20:47: INFO: _log Line:113 Message: 127.0.0.1 - - [24/Jul/2020 12:20:47] "[37mGET / HTTP/1.1[0m" 200 -
-07/24/2020 12:20:48: INFO: home Line:26 Message: Request made to home.
-07/24/2020 12:20:48: INFO: _log Line:113 Message: 127.0.0.1 - - [24/Jul/2020 12:20:48] "[37mGET / HTTP/1.1[0m" 200 -
+07/24/2020 14:03:47: INFO: <module> Line:48 Message: Opened port 5000 .
+07/24/2020 14:03:47: WARNING: _log Line:113 Message:  * Debugger is active!
+07/24/2020 14:03:47: INFO: _log Line:113 Message:  * Debugger PIN: 242-655-083

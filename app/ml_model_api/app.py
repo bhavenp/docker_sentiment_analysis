@@ -1,7 +1,7 @@
 import os, sys, logging
 from flask import Flask, request, jsonify
 
-# from predict import predict_online
+from predict import predict_online
 
 
 # start up a logger
@@ -35,7 +35,7 @@ def predict():
     if request.method == "POST":
         data = request.get_json()
         logger.debug(f"Input to predict/: {data}")
-        pred = "Making prediction" #predict_online(data=data["data"])
+        pred = predict_online(data=data["sentences"])
         return jsonify({"input": data, "pred": pred})
 
     if request.method == "GET":
