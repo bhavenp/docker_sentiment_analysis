@@ -1,14 +1,20 @@
-# import logging
+import logging
 
 from flask import Flask, request, jsonify
 
-from predict import predict_online
-# from ml_deploy_demo.util.utils import initialize_logging
+# from predict import predict_online
 
-# logger = logging.getLogger(__name__)
-# initialize_logging(config_path='/app/logging.yaml')
 
-app = Flask(__name__)
+# start up a logger
+fmtStr = "%(asctime)s: %(levelname)s: %(funcName)s Line:%(lineno)d Message: %(message)s"
+dateStr = "%m/%d/%Y %H:%M:%S"
+logging.basicConfig(filename="app_logs.out",
+                    level=logging.DEBUG,
+                    format=fmtStr,
+                    datefmt=dateStr)
+logger = logging.getLogger("flask_app") # create a logger object
+
+app = Flask(__name__) # create app object
 
 @app.route('/', methods=["GET", "POST"])
 def home():
@@ -22,14 +28,17 @@ def predict():
     """
     if request.method == "POST":
         data = request.get_json()
-        # logger.debug(f"Input to predict/: {data}")
+        logger.debug(f"Input to predict/: {data}")
         pred = "Making prediction" #predict_online(data=data["data"])
         return jsonify({"input": data, "pred": pred})
 
     if request.method == "GET":
         msg = "Please compose your request in POST type with data."
-        # logger.debug(f"Wrong request type {request}.")
+        logger.debug(f"Wrong request type {request}.")
         return jsonify({"msg": msg})
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    port = 5000
+    logger.info("Opened port {0} .".format(port))
+
+    app.run(port=port, debug=True)
