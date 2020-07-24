@@ -16,7 +16,8 @@ import tensorflow_datasets as tfds
 from utils import load_yaml
 
 
-
+# This example is taken from:
+# https://www.tensorflow.org/tutorials/keras/text_classification_with_hub
 def run_training_pipeline(config_model, logger):
     """ runs pipeline to train keras Dense NN model for sentiment classification """
 
@@ -64,9 +65,8 @@ def run_training_pipeline(config_model, logger):
     # Save model
     model_name = config_model["name"]
     save_path = os.path.join("./models", f"{model_name}.keras")
-    logger.(save_path)
     model.save(save_path)
-    # logger.info(f"Saved keras pipeline model at {save_path}")
+    logger.info("Saved keras pipeline model at {0}".format(save_path))
 
     # Load & Check Consistency
     checkpoint = load_keras_hub_model(save_path)
@@ -74,7 +74,7 @@ def run_training_pipeline(config_model, logger):
     assert np.all(
         checkpoint.predict(check_data) == model.predict(check_data)
     )
-    # logger.info("Keras saved model passed consistency check")
+    logger.info("Keras saved model passed consistency check")
 
 def load_keras_hub_model(save_path):
     return tf.keras.models.load_model(save_path,
