@@ -23,11 +23,9 @@ def run_training_pipeline(config_model, logger):
 
     # Split the training set into 60% and 40%, so we'll end up with 15,000 examples
     # for training, 10,000 examples for validation and 25,000 examples for testing.
-    train_validation_split = tfds.Split.TRAIN.subsplit([6, 4])
-
-    (train_data, validation_data), test_data = tfds.load(
-        name="imdb_reviews",
-        split=(train_validation_split, tfds.Split.TEST),
+    train_data, validation_data, test_data = tfds.load(
+        name="imdb_reviews", 
+        split=('train[:60%]', 'train[60%:]', 'test'),
         as_supervised=True)
 
     # Word Embeddings from Tensorflow-Hub
@@ -47,7 +45,8 @@ def run_training_pipeline(config_model, logger):
     model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
     # Compilation
-    model.compile(optimizer='adam', loss='binary_crossentropy',
+    model.compile(optimizer='adam', 
+        loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
         metrics=['accuracy'])
 
     # Train
@@ -92,7 +91,6 @@ if __name__ == "__main__":
     dateStr = "%m/%d/%Y %H:%M:%S"
     logging.basicConfig(filename=config['logging']['config_path'],
                         level=logging.DEBUG,
-                        filemode='w',
                         format=fmtStr,
                         datefmt=dateStr)
     logger = logging.getLogger("training_model") # create a logger object

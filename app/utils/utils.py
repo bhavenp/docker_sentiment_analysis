@@ -3,8 +3,6 @@ import logging.config
 from pathlib import Path
 import yaml
 
-import coloredlogs
-
 import numpy as np
 
 def load_yaml(yaml_path):
