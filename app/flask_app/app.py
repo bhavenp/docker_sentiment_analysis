@@ -1,5 +1,4 @@
-import logging
-
+import os, sys, logging
 from flask import Flask, request, jsonify
 
 # from predict import predict_online
@@ -8,7 +7,12 @@ from flask import Flask, request, jsonify
 # start up a logger
 fmtStr = "%(asctime)s: %(levelname)s: %(funcName)s Line:%(lineno)d Message: %(message)s"
 dateStr = "%m/%d/%Y %H:%M:%S"
-logging.basicConfig(filename="app_logs.out",
+
+# output logs in same directory as this file
+FILE_DIR = os.path.dirname(os.path.realpath(__file__)) 
+LOGGING_FILE = FILE_DIR + "/" + "app_logs.out"
+logging.basicConfig(filename=LOGGING_FILE,
+                    filemode='w',
                     level=logging.DEBUG,
                     format=fmtStr,
                     datefmt=dateStr)
@@ -16,8 +20,10 @@ logger = logging.getLogger("flask_app") # create a logger object
 
 app = Flask(__name__) # create app object
 
+# create route for 'homepage' for testing purposes
 @app.route('/', methods=["GET", "POST"])
 def home():
+    logger.info("Request made to home.")
     msg = "Flask app is up and running!"
     return jsonify({"msg": msg})
 
