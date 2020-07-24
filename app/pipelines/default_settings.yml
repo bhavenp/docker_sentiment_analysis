@@ -1,0 +1,13 @@
+# insert data related stuff
+data:
+    dataset_name: "imdb"
+
+model:
+    name: "sentiment_dense_nn"
+    params: {
+        "hidden_units": 16,
+        "hidden_layers": 1,
+        "num_epochs": 20,
+    }
+logging:
+    config_path: "logging.out"
