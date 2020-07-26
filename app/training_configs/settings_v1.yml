@@ -1,0 +1,10 @@
+model:
+    name: "sentiment_dense_nn"
+    params: {
+        "hidden_units": 16,
+        "hidden_layers": 1,
+        "num_epochs": 20,
+    }
+    output_dir: "models/"
+logging:
+    output_file_path: "training_configs/logging.out"

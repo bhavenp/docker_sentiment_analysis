@@ -1,0 +1,11 @@
+07/26/2020 12:09:03: INFO: <module> Line:31 Message: Model name: sentiment_dense_nn
+07/26/2020 12:09:03: INFO: <module> Line:35 Message: Model params: hidden_units=16, hidden_layers=1, num_epochs=20
+07/26/2020 12:09:03: INFO: _create_builder_config Line:799 Message: No config specified, defaulting to first: imdb_reviews/plain_text
+07/26/2020 12:09:03: INFO: read_from_directory Line:358 Message: Load dataset info from /Users/bhaven/tensorflow_datasets/imdb_reviews/plain_text/1.0.0
+07/26/2020 12:09:03: INFO: download_and_prepare Line:288 Message: Reusing dataset imdb_reviews (/Users/bhaven/tensorflow_datasets/imdb_reviews/plain_text/1.0.0)
+07/26/2020 12:09:03: INFO: as_dataset Line:500 Message: Constructing tf.data.Dataset for split ('train[:60%]', 'train[60%:]', 'test'), from /Users/bhaven/tensorflow_datasets/imdb_reviews/plain_text/1.0.0
+07/26/2020 12:09:03: INFO: tfhub_cache_dir Line:79 Message: Using /var/folders/g9/4thc17cx40z7d982d1ny01vm0000gn/T/tfhub_modules to cache modules.
+07/26/2020 12:09:41: INFO: run_nn_training_pipeline Line:51 Message: loss: 0.574
+07/26/2020 12:09:41: INFO: run_nn_training_pipeline Line:51 Message: accuracy: 0.859
+07/26/2020 12:09:41: INFO: run_nn_training_pipeline Line:58 Message: Saved forward-NN model at models/sentiment_dense_nn.keras
+07/26/2020 12:09:44: INFO: run_nn_training_pipeline Line:66 Message: Saved model passed consistency check.
