@@ -1,4 +1,4 @@
-import logging
+import os
 import numpy as np
 
 import tensorflow as tf
@@ -8,7 +8,7 @@ import tensorflow_datasets as tfds
 
 # This example is taken from:
 # https://www.tensorflow.org/tutorials/keras/text_classification_with_hub
-def run_training_pipeline(config_model, logger):
+def run_nn_training_pipeline(model_config, logger):
     """ runs pipeline to train keras Dense NN model for sentiment classification """
 
     # Split the training set into 60% and 40%, so we'll end up with 15,000 examples
@@ -27,9 +27,9 @@ def run_training_pipeline(config_model, logger):
     print("Creating model")
     model = tf.keras.Sequential()
     model.add(hub_layer)
-    for _ in range(config_model['params']['hidden_layers']):
+    for _ in range(model_config['params']['hidden_layers']):
         model.add(tf.keras.layers.Dense(
-            config_model['params']['hidden_units'],
+            model_config['params']['hidden_units'],
             activation='relu'))
     # add output layer
     model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
@@ -41,7 +41,7 @@ def run_training_pipeline(config_model, logger):
 
     # Train
     history = model.fit(train_data.shuffle(10000).batch(512),
-                    epochs=config_model['params']['num_epochs'],
+                    epochs=model_config['params']['num_epochs'],
                     validation_data=validation_data.batch(512),
                     verbose=1)
     # Test
@@ -52,20 +52,20 @@ def run_training_pipeline(config_model, logger):
         print("%s: %.3f" % (name, value));
 
     # Save model
-    model_name = config_model["name"]
-    save_path = os.path.join("./models", f"{model_name}.keras")
+    model_name = model_config["name"]
+    save_path = os.path.join(model_config['output_dir'], f"{model_name}.keras")
     model.save(save_path)
-    logger.info("Saved keras pipeline model at {0}".format(save_path))
+    logger.info("Saved forward-NN model at {0}".format(save_path))
 
     # Load & Check Consistency
-    checkpoint = load_keras_hub_model(save_path)
+    checkpoint = load_nn_model(save_path)
     check_data = test_data.batch(512)
     assert np.all(
         checkpoint.predict(check_data) == model.predict(check_data)
     )
-    logger.info("Keras saved model passed consistency check")
+    logger.info("Saved model passed consistency check.")
 
-def load_keras_hub_model(save_path):
+def load_nn_model(save_path):
     return tf.keras.models.load_model(save_path,
         custom_objects={'KerasLayer': hub.KerasLayer}
     )

@@ -3,6 +3,7 @@ import logging
 import numpy as np
 
 from utils import load_yaml
+from pipelines import run_nn_training_pipeline
 
 
 if __name__ == "__main__":
@@ -21,6 +22,7 @@ if __name__ == "__main__":
     fmtStr = "%(asctime)s: %(levelname)s: %(funcName)s Line:%(lineno)d Message: %(message)s"
     dateStr = "%m/%d/%Y %H:%M:%S"
     logging.basicConfig(filename=config_map['logging']['output_file_path'],
+                        filemode='w',
                         level=logging.DEBUG,
                         format=fmtStr,
                         datefmt=dateStr)
@@ -33,4 +35,4 @@ if __name__ == "__main__":
         model_config_params['params']["num_epochs"]) )
 
 
-    # run_training_pipeline(config_model, logger)
+    run_nn_training_pipeline(model_config_params, logger)
