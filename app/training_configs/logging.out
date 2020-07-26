@@ -1,0 +1,2 @@
+07/26/2020 11:45:09: INFO: <module> Line:29 Message: Model name: sentiment_dense_nn
+07/26/2020 11:45:09: INFO: <module> Line:33 Message: Model params: hidden_units=16, hidden_layers=1, num_epochs=20

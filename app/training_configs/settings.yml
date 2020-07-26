@@ -1,7 +1,3 @@
-# insert data related stuff
-data:
-    dataset_name: "imdb"
-
 model:
     name: "sentiment_dense_nn"
     params: {
@@ -10,4 +6,4 @@ model:
         "num_epochs": 20,
     }
 logging:
-    config_path: "logging.out"
+    output_file_path: "training_configs/logging.out"
