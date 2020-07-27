@@ -1,14 +1,12 @@
 import logging
 import os, sys
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))); # so I can load utils
-
-from pipelines.train_model import load_keras_hub_model
+from pipelines import load_nn_model
 
 # logger = logging.getLogger(__name__)
 
 # TODO: specify this path when starting up the app
-MODEL_PATH = 'pipelines/models/sentiment_dense_nn.keras'
+MODEL_PATH = 'models/sentiment_dense_nn.keras'
 # logger.info(f"Path to model: {MODEL_PATH}")
 
 def predict_online(data):
@@ -18,7 +16,7 @@ def predict_online(data):
     try:
         print(os.getcwd())
         
-        checkpoint = load_keras_hub_model(MODEL_PATH)
+        checkpoint = load_nn_model(MODEL_PATH)
         print("Successfully loaded the model")
         pred = checkpoint.predict(data)
         pred = pred.tolist()

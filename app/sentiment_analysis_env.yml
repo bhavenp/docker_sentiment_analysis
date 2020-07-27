@@ -6,7 +6,7 @@ dependencies:
   - numpy
   - pandas
   - scikit-learn
-  - flask
+  - flask==1.1.2
   - gunicorn
   - pip==19.3.1
   - pip:
