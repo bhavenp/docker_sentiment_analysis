@@ -19,17 +19,17 @@ from flask import request, jsonify
 #                     datefmt=dateStr)
 # logger = logging.getLogger("flask_app") # create a logger object
 
-ml_model_api_blueprint = Blueprint('ml_model_api_blueprint', __name__) # create a Blueprint object
+ml_model_bp = Blueprint('ml_model_bp', __name__) # create a Blueprint object
 
 # create 'home' view for testing purposes
-@ml_model_api_blueprint.route('/', methods=["GET", "POST"])
+@ml_model_bp.route('/', methods=["GET", "POST"])
 def home():
     # logger.info("Request made to home.")
     msg = "Flask app is up and running!"
     return jsonify({"msg": msg})
 
 # create route for prediction
-@ml_model_api_blueprint.route("/predict", methods=["GET", "POST"])
+@ml_model_bp.route("/predict", methods=["GET", "POST"])
 def predict():
     """Performs an inference
     """
