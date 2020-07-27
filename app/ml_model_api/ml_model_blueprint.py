@@ -2,7 +2,7 @@ import os, sys, logging
 from flask import Blueprint
 from flask import request, jsonify
 
-# from predict import predict_online
+from ml_model_api.predict import predict_online
 
 
 # start up a logger
@@ -36,8 +36,8 @@ def predict():
     if request.method == "POST":
         data = request.get_json()
         # logger.debug(f"Input to predict/: {data}")
-        # pred = predict_online(data=data["sentences"])
-        pred = [-1] * len(data)
+        pred = predict_online(data=data["sentences"])
+        # pred = [-1] * len(data)
         return jsonify({"input": data, "pred": pred})
 
     if request.method == "GET":
