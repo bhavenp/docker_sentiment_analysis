@@ -1,10 +1,10 @@
 import os, sys
 
-from pipelines import load_nn_model
+from model_training.pipelines import load_nn_model
 
 
 # TODO: specify this path when starting up the app
-MODEL_PATH = 'models/sentiment_dense_nn.keras'
+MODEL_PATH = '../model_training/models/sentiment_dense_nn.keras'
 
 
 def predict_online(data):
