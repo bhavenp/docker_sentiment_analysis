@@ -16,9 +16,7 @@ def predict_online(data):
         
         pred = nn_model.predict(data)
         pred = pred.tolist()
-        # logger.info({"input": data, "pred": pred})
     except Exception as e:
-        # logger.error(f"{e}")
         print(e)
         pred = []
 
