@@ -7,4 +7,4 @@ model:
     }
     output_dir: "models/"
 logging:
-    output_file_path: "training_configs/logging.out"
+    output_file_path: "logs/sentiment_dense_nn.log"
