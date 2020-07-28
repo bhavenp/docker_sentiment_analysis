@@ -1,9 +1,0 @@
-07/27/2020 16:39:54: INFO: <module> Line:20 Message: Initializing a Flask app...
-07/27/2020 16:39:54: WARNING: _log Line:113 Message:  * Debugger is active!
-07/27/2020 16:39:54: INFO: _log Line:113 Message:  * Debugger PIN: 308-038-071
-07/27/2020 16:40:00: INFO: home Line:13 Message: Request made to home.
-07/27/2020 16:40:00: INFO: _log Line:113 Message: 127.0.0.1 - - [27/Jul/2020 16:40:00] "[37mGET / HTTP/1.1[0m" 200 -
-07/27/2020 16:40:09: DEBUG: predict Line:24 Message: Input to "predict" endpoint: ['this place is the worst!', 'this place is the best!', 'I love this place.']
-07/27/2020 16:40:09: INFO: tfhub_cache_dir Line:79 Message: Using /var/folders/g9/4thc17cx40z7d982d1ny01vm0000gn/T/tfhub_modules to cache modules.
-07/27/2020 16:40:10: DEBUG: predict Line:26 Message: Sentiment predictions = [[0.033529408276081085], [0.9829636812210083], [0.9513072371482849]]
-07/27/2020 16:40:10: INFO: _log Line:113 Message: 127.0.0.1 - - [27/Jul/2020 16:40:10] "[37mPOST /predict HTTP/1.1[0m" 200 -

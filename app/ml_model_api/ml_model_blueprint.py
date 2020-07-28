@@ -29,5 +29,5 @@ def predict():
 
     if request.method == "GET":
         msg = "Please compose your request in POST type with data."
-        current_app.logger.debug(f"Wrong request type {request}.")
+        current_app.logger.error(f"Wrong request type {request}.")
         return jsonify({"msg": msg})
