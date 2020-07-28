@@ -1,6 +1,7 @@
 import os, sys, logging
 from flask import Blueprint, current_app
 from flask import request, jsonify
+from flask import render_template
 
 from ml_model_api.predict import predict_online
 
@@ -12,7 +13,8 @@ ml_model_bp = Blueprint('ml_model_bp', __name__) # create a Blueprint object
 def home():
     current_app.logger.info("Request made to home.")
     msg = "Flask app is up and running!"
-    return jsonify({"msg": msg})
+    # return jsonify({"msg": msg})
+    return render_template('homepage/index.html')
 
 # create route for prediction
 @ml_model_bp.route("/predict", methods=["GET", "POST"])
