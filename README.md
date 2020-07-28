@@ -8,6 +8,25 @@ This project is an extension of the [ComputeFest 2020- "Notebook to Cloud" works
 2. Build a Flask app that has an endpoint that can receive data in the form of sentences and return sentiment predictions/scores.
 3. Build a GUI through which users can submit a sentence. GUI will then show the sentiment score.
 
+## Present
+1. Use the the `sentiment_analysis_env.yaml` file at the root of the repo to create a Conda environment and start it.
+	1. Run `conda env create -f sentiment_analysis_env.yaml`.
+	2. Run `conda activate sentiment_analysis_env` to start the Conda environment.
+2. Install the project by running `pip install -e .`. This will allow all of the modules to be imported correctly.
+3. Change directory to the `app/` directory and run `python run_app.py` to start up the app.
+	1. The app will start up on [](http://127.0.0.1:5000/), which is the homepage. The functionality is still being built out.
+	2. HTTP POST requests can be sent to [](http://127.0.0.1:5000/predict/) to get sentiment scores for provided sentences.
+		1. The body of the POST request should look like:
+		```
+		{
+			"sentences":[
+						  "this place is the worst!",
+            			  "this place is the best!",
+            			  "I love this place."
+            			]
+        }
+		```
+
 ## Future work
 1. There will be a single Docker container that will serve as an endpoint. Prediction will be served from this endpoint.
 2. I want to add a container that controls a GUI.
