@@ -22,8 +22,12 @@ def home():
     elif request.method == "POST":
         sentence = request.form['sentence']
         current_app.logger.info(f"User wants sentiment for '{sentence}'.")
+        
         pred = make_prediction(sentences=[sentence]) # make the prediction for the sentence
-        return str(pred[0][0]) # pred is a list with another list inside of it
+        pred_score = str(pred[0][0]) # pred is a list with another list inside of it
+        current_app.logger.info(f"Sentiment score = {pred_score}")
+        
+        return render_template('after_prediction/index.html', sentence=sentence, pred_score=pred_score)
 
 # create route for prediction
 @ml_model_bp.route("/predict", methods=["GET", "POST"])

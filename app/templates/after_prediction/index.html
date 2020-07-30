@@ -19,8 +19,14 @@
 				<h1>Sentiment Analysis</h1>
 			</header>
 
+		<!-- Show sentiment result -->
+			<div>
+				<h3> Your sentence: {{ sentence }} </h3><br>
+				<h3> Sentiment score = {{ pred_score }} </h3><br>
+			</div>
+
 		<!-- Input Sentence Form -->
-			Get the sentiment of any sentence. Just type in your sentence below.<br>
+			Get the sentiment of another sentence. Just type in your sentence below.
 			<form method="post">
 				<input type="text" name="sentence" placeholder="Sentence" />
 				<input type="submit" value="Get Sentiment" />
@@ -40,7 +46,7 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/main.js"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
 
 	</body>
 </html>
