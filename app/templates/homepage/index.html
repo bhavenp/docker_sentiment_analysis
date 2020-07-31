@@ -40,7 +40,15 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+			<script type='text/javascript' src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+			<script type='text/javascript'>
+
+				var imageList = [ "{{ url_for('static', filename='images/bg01.jpg')}}", 
+								"{{ url_for('static', filename='images/bg02.jpg')}}",
+								"{{ url_for('static', filename='images/bg03.jpg')}}"
+								]; // Array with list of images
+				runBackground(imageList); // Execute function that loaded from main.js
+			</script>
 
 	</body>
 </html>
