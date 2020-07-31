@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Input Sentence Form -->
+	Get the sentiment of any sentence. Just type in your sentence below.<br>
+	<form method="post">
+		<input type="text" name="sentence" placeholder="Sentence" />
+		<input type="submit" value="Get Sentiment" />
+	</form>
+{% endblock %}
