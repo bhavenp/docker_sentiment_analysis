@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+		<!-- Show sentiment result -->
+			<div>
+				<h3> Your sentence: {{ sentence }} </h3>
+				<h3> Sentiment score = {{ pred_score }} </h3><br>
+			</div>
+
+		<!-- Input Sentence Form -->
+			Get the sentiment of another sentence. Just type in your sentence below.
+			<form method="post">
+				<input type="text" name="sentence" placeholder="Sentence" />
+				<input type="submit" value="Get Sentiment" />
+			</form>
+{% endblock %}
