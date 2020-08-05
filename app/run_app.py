@@ -22,8 +22,7 @@ def create_app():
 		return "Hello World!"
 
 	# Determine model_path based on location of this file
-	# root_path = 
-	app.model_path = '../model_training/models/sentiment_dense_nn.keras'
+	app.model_path = dir_path.parents[0] / 'model_training/models/sentiment_dense_nn.keras'
 	app.register_blueprint(ml_model_bp)
 
 	return app
