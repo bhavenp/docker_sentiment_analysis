@@ -3,16 +3,12 @@ import os, sys
 from model_training.pipelines import load_nn_model
 
 
-# TODO: specify this path when starting up the app
-MODEL_PATH = '../model_training/models/sentiment_dense_nn.keras'
-
-
-def predict_online(data):
+def predict_online(model_path, data):
     """Predict from in-memory data on the fly.
     """
     try:
         
-        nn_model = load_nn_model(MODEL_PATH)
+        nn_model = load_nn_model(model_path)
         
         pred = nn_model.predict(data)
         pred = pred.tolist()
