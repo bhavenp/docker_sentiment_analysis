@@ -1,6 +1,7 @@
 name: sentiment_analysis_env
 dependencies:
   - python=3.6
+  - pytest==5.4.3
   - pyyaml
   - jupyter
   - numpy
