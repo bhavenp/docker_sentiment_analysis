@@ -3,7 +3,7 @@ from flask import Blueprint, current_app
 from flask import request, jsonify
 from flask import render_template
 
-from ml_model_api.predict import predict_online
+from app.ml_model_api.predict import predict_online
 
 
 ml_model_bp = Blueprint('ml_model_bp', __name__) # create a Blueprint object
