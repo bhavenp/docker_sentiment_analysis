@@ -3,7 +3,7 @@ import pytest
 from app import run_app
 
 
-@pytest.fixture
+@pytest.fixture #TODO: Read on about fixtures
 def app():
 	app = run_app.create_app()
 	yield app

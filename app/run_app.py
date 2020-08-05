@@ -7,7 +7,8 @@ from app.ml_model_api import ml_model_bp
 
 def create_app():
 
-	initialize_logging("./logs/logging.yaml") # load and configure logging
+	logs_path = "./logs/logging.yaml" #TODO: Determine logs/ path based on location of this file
+	initialize_logging(logs_path) # load and configure logging
 
 	app = Flask(__name__)
 	app.logger.info("Initializing a Flask app...")
@@ -16,6 +17,7 @@ def create_app():
 	def hello():
 		return "Hello World!"
 
+	#TODO: Determine model_path based on location of this file
 	app.model_path = '../model_training/models/sentiment_dense_nn.keras'
 	app.register_blueprint(ml_model_bp)
 
