@@ -10,6 +10,7 @@ if __name__ == "__main__":
 
 	app = Flask(__name__)
 	app.logger.info("Initializing a Flask app...")
-	
+
+	app.model_path = '../model_training/models/sentiment_dense_nn.keras'
 	app.register_blueprint(ml_model_bp)
 	app.run(debug=True)

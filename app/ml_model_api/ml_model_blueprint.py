@@ -7,7 +7,6 @@ from app.ml_model_api.predict import predict_online
 
 
 ml_model_bp = Blueprint('ml_model_bp', __name__) # create a Blueprint object
-model_path = '../model_training/models/sentiment_dense_nn.keras'
 
 
 # create 'home' view for testing purposes
@@ -21,7 +20,7 @@ def home():
         sentence = request.form['sentence']
         current_app.logger.info(f"User wants sentiment for '{sentence}'.")
         
-        pred = predict_online(model_path=model_path, data=[sentence]) # make the prediction for the sentence
+        pred = predict_online(model_path=current_app.model_path, data=[sentence]) # make the prediction for the sentence
         pred_score = str(pred[0][0]) # pred is a list with another list inside of it
         current_app.logger.info(f"Sentiment score = {pred_score}")
         
@@ -35,7 +34,7 @@ def predict():
     if request.method == "POST":
         data = request.get_json()
         current_app.logger.debug(f"Input to \"predict\" endpoint: {data['sentences']}")
-        pred = predict_online(model_path=model_path, data=data["sentences"])
+        pred = predict_online(model_path=current_app.model_path, data=data["sentences"])
         current_app.logger.debug(f"Sentiment predictions = {pred}")
         
         return jsonify({"input": data, "pred": pred})
