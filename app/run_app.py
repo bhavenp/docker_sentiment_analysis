@@ -1,8 +1,8 @@
 import logging
 from flask import Flask
 
-from utils import initialize_logging
-from ml_model_api import ml_model_bp
+from app.utils import initialize_logging
+from app.ml_model_api import ml_model_bp
 
 
 def create_app():
@@ -18,7 +18,6 @@ def create_app():
 
 	app.model_path = '../model_training/models/sentiment_dense_nn.keras'
 	app.register_blueprint(ml_model_bp)
-	app.run(debug=True)
 
 	return app
 
