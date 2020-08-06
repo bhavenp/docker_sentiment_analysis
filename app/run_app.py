@@ -7,7 +7,10 @@ from flask import Flask
 from app.utils import initialize_logging
 from app.ml_model_api import ml_model_bp
 
-
+'''
+This is the application factory function.
+Any configuration, registration, and other setup the application needs will happen inside the function, then the application will be returned.
+'''
 def create_app():
 
 	dir_path = Path(os.path.dirname(os.path.realpath(__file__))) # get the path to the directory in which run_app.py resides
