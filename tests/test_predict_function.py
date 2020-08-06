@@ -1,5 +1,4 @@
-import pytest
-
+'''This file holds tests for loading a model and retrieving predictions to it.'''
 from app.ml_model_api.predict import predict_online
 from model_training.pipelines import load_nn_model
 

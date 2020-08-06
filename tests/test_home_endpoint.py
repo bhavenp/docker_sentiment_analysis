@@ -1,3 +1,10 @@
+'''
+This file holds tests to ensure the '/home' endpoint works as 
+expected. The '/home' endpoint can be hit with GET or POST Requests.
+For POST Requests, the data comes in as a dictionary with a key 
+called 'sentence' mapping to a String that user wants the sentiment for.
+'''
+
 # test that hello endpoint is working
 def test_hello(client):
 	response = client.get('/hello')
