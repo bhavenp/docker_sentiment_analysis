@@ -37,6 +37,7 @@ This project is an extension of the [ComputeFest 2020- "Notebook to Cloud" works
 ## Issues:
 1. Pre-trainined model for embedding layer is cached locally, so when the cache is emptied automatically, tensorflow still thinks the model is cached locally.
 	1. __Solution:__ I removed the directory where tensorflow_hub caches the model, then I reran the training process. Tested that the app works too.
+2. Model is loaded every time a prediction needs to be made. It should only need to be loaded once when the application starts up.
 
 ## Future work
 1. There will be a single Docker container that will serve as an endpoint. Prediction will be served from this endpoint.
