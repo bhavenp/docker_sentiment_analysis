@@ -13,3 +13,4 @@ dependencies:
     - tensorflow==2.2.0
     - tensorflow_hub==0.8.0
     - tensorflow_datasets==3.2.1
+    - gunicorn==20.0.4
