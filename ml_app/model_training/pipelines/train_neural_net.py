@@ -3,13 +3,15 @@ import numpy as np
 
 import tensorflow as tf
 import tensorflow_hub as hub
-import tensorflow_datasets as tfds
 
 
 # This example is taken from:
 # https://www.tensorflow.org/tutorials/keras/text_classification_with_hub
 def run_nn_training_pipeline(model_config, logger):
     """ runs pipeline to train keras Dense NN model for sentiment classification """
+
+    # import this here because we do not need it for other functions
+    import tensorflow_datasets as tfds
 
     # Split the training set into 60% and 40%, so we'll end up with 15,000 examples
     # for training, 10,000 examples for validation and 25,000 examples for testing.
