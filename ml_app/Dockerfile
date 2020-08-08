@@ -3,7 +3,7 @@ FROM continuumio/miniconda3
 WORKDIR /usr/src/ml_app
 
 # Create the environment
-COPY sentiment_analysis_model_env.yaml .
+COPY docker_sentiment_analysis_model_env.yaml sentiment_analysis_model_env.yaml
 RUN conda env create -f sentiment_analysis_model_env.yaml
 
 # Make RUN commands use the new environment:
