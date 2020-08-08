@@ -4,8 +4,9 @@ import logging
 
 from flask import Flask
 
-from app.utils import initialize_logging
-from app.ml_model_api import ml_model_bp
+from utils import initialize_logging
+from ml_model_api import ml_model_bp
+from model_training.pipelines import load_nn_model
 
 '''
 This is the application factory function.
@@ -20,12 +21,9 @@ def create_app():
 	app = Flask(__name__)
 	app.logger.info("Initializing a Flask app...")
 
-	@app.route("/hello")
-	def hello():
-		return "Hello World!"
-
-	# Determine model_path based on location of this file
-	app.model_path = dir_path.parents[0] / 'model_training/models/sentiment_dense_nn.keras'
+	# Determine path to the model file based on location of this file
+	model_path = dir_path / 'model_training/models/sentiment_dense_nn.keras'
+	app.model = load_nn_model(model_path)
 	app.register_blueprint(ml_model_bp)
 
 	return app

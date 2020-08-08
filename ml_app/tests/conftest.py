@@ -5,9 +5,7 @@ function in the other files will use. These fixtures for the 'app' and
 consistency.
 '''
 import pytest
-
-from app import run_app
-
+import run_app
 
 @pytest.fixture
 def app():

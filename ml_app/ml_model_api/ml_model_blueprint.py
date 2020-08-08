@@ -1,30 +1,29 @@
 import os, sys, logging
 from flask import Blueprint, current_app
 from flask import request, jsonify
-from flask import render_template
-
-from app.ml_model_api.predict import predict_online
-
 
 ml_model_bp = Blueprint('ml_model_bp', __name__) # create a Blueprint object
 
 
-# create 'home' view for testing purposes
+# create 'index' view for testing purposes
 @ml_model_bp.route('/', methods=["GET", "POST"])
-def home():
-    if request.method == "GET":
-        current_app.logger.info("Request made to home.")
-        return render_template('index.html')
+def index():
+    return "ML model application is running!"
 
-    elif request.method == "POST":
-        sentence = request.form['sentence']
-        current_app.logger.info(f"User wants sentiment for '{sentence}'.")
+# helper method for predict/ endpoint
+def get_pred(data):
+    """Predict from in-memory data on the fly.
+    """
+    try:
+        nn_model = current_app.model
         
-        pred = predict_online(model_path=current_app.model_path, data=[sentence]) # make the prediction for the sentence
-        pred_score = str(pred[0][0]) # pred is a list with another list inside of it
-        current_app.logger.info(f"Sentiment score = {pred_score}")
-        
-        return render_template('after_prediction.html', sentence=sentence, pred_score=pred_score)
+        pred = nn_model.predict(data)
+        pred = pred.tolist()
+    except Exception as e:
+        print(e)
+        pred = []
+
+    return pred
 
 # create route for prediction
 @ml_model_bp.route("/predict", methods=["GET", "POST"])
@@ -32,9 +31,10 @@ def predict():
     """Performs an inference
     """
     if request.method == "POST":
-        data = request.get_json()
+        data = request.get_json() # sentences come in through JSON
         current_app.logger.debug(f"Input to \"predict\" endpoint: {data['sentences']}")
-        pred = predict_online(model_path=current_app.model_path, data=data["sentences"])
+
+        pred = get_pred( data=data["sentences"])
         current_app.logger.debug(f"Sentiment predictions = {pred}")
         
         return jsonify({"input": data, "pred": pred})
