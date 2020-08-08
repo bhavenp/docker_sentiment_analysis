@@ -1,12 +1,10 @@
-# Deployable Sentiment Analysis model
+# Dockerized Sentiment Analysis application
 
-This repo is for developing a sentiment analysis model that can be deployed using a Flask application. 
-This project is an extension of the [ComputeFest 2020- "Notebook to Cloud" workshop](https://github.com/Harvard-IACS/2020-ComputeFest).
+This repo is for developing a Dockerized sentiment analysis application that I built in [this repo](https://github.com/bhavenp/deployable_sentiment_analysis/).
 
 ## Steps
-1. Build a training pipeline to train & save a sentiment analysis model.
-2. Build a Flask app that has an endpoint that can receive data in the form of sentences and return sentiment predictions/scores.
-3. Build a GUI through which users can submit a sentence. GUI will then show the sentiment score.
+1. Build a Docker container that serves the sentiment analysis model. This model should only have to be loaded once when the containers starts up.
+2. Build a Docker container that serves the UI through which users can submit a sentence. The UI will then send a request to the model container and show the related sentiment score.
 
 ## Present
 1. Use the the `sentiment_analysis_env.yaml` file at the root of the repo to create a Conda environment and start it.
@@ -37,10 +35,3 @@ This project is an extension of the [ComputeFest 2020- "Notebook to Cloud" works
 ## Issues:
 1. Pre-trainined model for embedding layer is cached locally, so when the cache is emptied automatically, tensorflow still thinks the model is cached locally.
 	1. __Solution:__ I removed the directory where tensorflow_hub caches the model, then I reran the training process. Tested that the app works too.
-2. Model is loaded every time a prediction needs to be made. It should only need to be loaded once when the application starts up.
-
-## Future work
-1. There will be a single Docker container that will serve as an endpoint. Prediction will be served from this endpoint.
-2. I want to add a container that controls a GUI.
-3. I want to add a container that runs a SQL database that will store previous queries to the model and the results.
-
