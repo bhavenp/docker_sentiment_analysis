@@ -1,0 +1,1 @@
+from app.ml_model_api.ml_model_blueprint import ml_model_bp
