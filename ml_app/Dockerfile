@@ -1,13 +1,11 @@
-FROM continuumio/miniconda3
+# Use official Docker image for python 3.6.10
+FROM python:3.6.10-slim-buster
 
 WORKDIR /usr/src/ml_app
 
-# Create the environment
-COPY docker_sentiment_analysis_model_env.yaml sentiment_analysis_model_env.yaml
-RUN conda env create -f sentiment_analysis_model_env.yaml
-
-# Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", "sentiment_analysis_model_env", "/bin/bash", "-c"]
+# Copy over requirements.txt and install dependencies
+COPY Docker_related_files/requirements.txt .
+RUN pip install -r requirements.txt
 
 # Copy the relevant files and directories
 COPY ./setup.py .
@@ -28,4 +26,4 @@ RUN pip install -e .
 RUN chmod +x run.sh
 
 EXPOSE 8000
-ENTRYPOINT ["conda", "run", "-n", "sentiment_analysis_model_env", "./run.sh"]
+ENTRYPOINT ["./run.sh"]
