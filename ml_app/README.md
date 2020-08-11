@@ -1,6 +1,7 @@
 This directory contains the code for the backend of the application, which loads the sentiment analysis model and provides an endpoint through which users can get predictions for their sentences. 
 ## Start-up the application WITH DOCKER
-1. Run `docker build <docker_repo_name>/<tag> .` to build the Docker image. This image is close to 4GB right now, but needs to be smaller.
+1. Run `docker build <docker_repo_name>/<tag> .` to build the Docker image. The `Dockerfile` contains the instructions for building the Docker image.
+	1. __This image is ~3.1GB right now, but needs to be smaller.__
 2. Run `docker images` to find the Docker image ID for the image you just built.
 3. Run `docker run -p 8000:8000 <docker_image_ID>`.
 	1. The backend application will start up on [http://0.0.0.0:8000/](http://0.0.0.0:8000/), so you should see "ML model application is running!" when you visit that page.
