@@ -18,7 +18,6 @@ COPY ./model_training/pipelines model_training/pipelines
 COPY ./run_app.py .
 COPY ./run.sh .
 COPY ./utils/ ./utils/
-RUN ls -ah
 
 # Create project/modules hierarchy
 RUN pip install -e .
