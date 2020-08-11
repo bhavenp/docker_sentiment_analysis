@@ -35,7 +35,8 @@ This directory contains the code for the backend of the application, which loads
 
 
 ## Folder Descriptions
-1. `logs`: Contains different _.log_ files that provide information on how a user interacted with the application and any errors that occurred.
+1. `Docker_related_files`: Contains files that specify the packages/dependencies needed to run the backend application in a Docker container.
+2. `logs`: Contains different _.log_ files that provide information on how a user interacted with the application and any errors that occurred.
 	1. The `logging.yaml` file specifies configurations for the logger used by the Flask application.
 2. `ml_model_api`: Contains files implementing the backend of the application.
 	1. `ml_model_blueprint.py` contains a Flask Blueprint that details which endpoints are served and how they are served.
