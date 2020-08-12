@@ -1,2 +1,3 @@
 # utils init file
-from app.utils.initialize_logging import initialize_logging
+from utils.initialize_logging import initialize_logging
+from utils.load_yaml import load_yaml
