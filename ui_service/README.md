@@ -1,6 +1,6 @@
-This directory contains the code for the frontend of the application, which displays a nice UI in a web browser for the user to interact with. Users are able to type out their sentences and get sentiment predictions for their sentences.
+This directory contains the code for the frontend service of the application, which displays a nice UI in a web browser for the user to interact with. Users are able to type out their sentences and get sentiment predictions for their sentences.
 
-## Start-up the Flask application running the UI WITHOUT DOCKER
+## Start-up the UI service WITHOUT DOCKER
 1. Use the the `sentiment_analysis_ui_env.yaml` file in this directory to create a Conda environment and start it.
 	1. Run `conda env create -f sentiment_analysis_ui_env.yaml`.
 	2. Run `conda activate sentiment_analysis_ui_env` to start the Conda environment.
@@ -17,11 +17,13 @@ This directory contains the code for the frontend of the application, which disp
 ## Folder Descriptions
 1. `logs`: Contains different _.log_ files that provide information on how a user interacted with the application and any errors that occurred.
 	1. The `logging.yaml` file specifies configurations for the logger used by the Flask application.
-2. `ml_model_api`: Contains files implementing the backend of the application.
-	1. `ml_model_blueprint.py` contains a Flask Blueprint that details which endpoints are served and how they are served.
-	2. `predict.py` contains a single function, `predict_online`, that loads the `models/sentiment_dense_nn.keras` model and uses the loaded model to predict sentiment scores for the user-inputted sentences.
+
 3. `static`: Contains the CSS and JavaScript code for the GUI component of the application.
 4. `templates`: Contains the Jinja templates that are served as part of the GUI.
 	1. `base.html` is the base template that `index.html` and `after_prediction.html` build off of.
 	2. The HTML, CSS and JavaScript code was adapted from the _Eventually_ design by [HTML5 UP](html5up.net).
-5. `utils`: Contains code and functions that are shared. Currently, it only contains a single Python file called `initialize_logging.py`, which starts up the logger with the proper configurations.
+2. `ui_api`: Contains files implementing the frontend API of the service.
+	1. `ui_blueprint.py` contains a Flask Blueprint that details which endpoints are served and how they are served.
+5. `utils`: Contains code and functions that can be shared.
+	1. `initialize_logging.py`: Starts up the logger with the proper configurations.
+	2. `load_yaml`: Reads in the configuration details from a YAML file.
