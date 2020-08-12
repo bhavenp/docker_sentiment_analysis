@@ -7,3 +7,4 @@ dependencies:
   - pip==19.3.1
   - pip:
     - gunicorn==20.0.4
+    - requests
