@@ -10,10 +10,16 @@ ui_bp = Blueprint('ui_bp', __name__) # create a Blueprint object
 
 
 def send_prediction_request(sentence):
-    response = requests.post('http://0.0.0.0:8000/predict', 
-        json={"sentences": [sentence]})
+    try:
+        response = requests.post('http://0.0.0.0:8000/predict', 
+            json={"sentences": [sentence]})
+    except requests.exceptions.ConnectionError: # Catch error when ML service is not running
+        return "Could not connect to \'http://0.0.0:8000/predict\'. Check if the ML service is running."
+    except Exception as e: # Catch all other errors
+        return str(e)
+
     if response.status_code != 200:
-        return "Error in sending request to model endpoint"
+        return "Error in sending request to ML model endpoint"
     
     json_data = response.json()
     return str(json_data['pred'][0][0]) # pred is a list with another list inside of it
