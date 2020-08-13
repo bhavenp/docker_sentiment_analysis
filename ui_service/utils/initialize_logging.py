@@ -1,6 +1,6 @@
 import sys,logging
 from pathlib import Path
-from model_training.utils import load_yaml
+from utils import load_yaml
 
 def initialize_logging(config_path, dir_path=None):
     """Initialize logger from path.

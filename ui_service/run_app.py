@@ -4,8 +4,8 @@ import logging
 
 from flask import Flask
 
-from app.utils import initialize_logging
-from app.ml_model_api import ml_model_bp
+from utils import initialize_logging
+from ui_api import ui_bp
 
 '''
 This is the application factory function.
@@ -24,12 +24,11 @@ def create_app():
 	def hello():
 		return "Hello World!"
 
-	# Determine model_path based on location of this file
-	app.model_path = dir_path.parents[0] / 'model_training/models/sentiment_dense_nn.keras'
-	app.register_blueprint(ml_model_bp)
+	app.register_blueprint(ui_bp)
 
 	return app
 
 
 if __name__ == "__main__":
-	create_app()
+	app = create_app()
+	app.run(port=8001, debug=True)

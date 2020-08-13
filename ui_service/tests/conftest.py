@@ -6,7 +6,7 @@ consistency.
 '''
 import pytest
 
-from app import run_app
+import run_app
 
 
 @pytest.fixture
