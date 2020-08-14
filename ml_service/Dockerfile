@@ -1,7 +1,7 @@
 # Use official Docker image for python 3.6.10
 FROM python:3.6.10-slim-buster
 
-WORKDIR /usr/src/ml_app
+WORKDIR /usr/src/ml_service
 
 # Copy over requirements.txt and install dependencies
 COPY Docker_related_files/requirements.txt .

@@ -8,7 +8,7 @@ ml_model_bp = Blueprint('ml_model_bp', __name__) # create a Blueprint object
 # create 'index' view for testing purposes
 @ml_model_bp.route('/', methods=["GET", "POST"])
 def index():
-    return "ML model application is running!"
+    return "ML model service is running!"
 
 # helper method for predict/ endpoint
 def get_pred(data):
