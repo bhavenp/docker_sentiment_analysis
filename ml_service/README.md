@@ -17,6 +17,7 @@ This directory contains the code for the backend of the application, which loads
         }
 		```
 		2. This can be done using an application such as [Postman](https://www.postman.com/).
+3. To ssh into the container, run `docker exec -it <container_name> /bin/bash`. You can `cd` into the `logs/` directory and look at the logs for service as you send requests to it.
 4. Stop the container using `docker stop <container_ID>` and remove it using `docker rm <container_ID>`.
 
 ## Start-up the ML service WITHOUT DOCKER
