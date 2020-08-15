@@ -1,7 +1,7 @@
 # Use official Docker image for python 3.6.10
 FROM python:3.6.10-slim-buster
 
-WORKDIR /usr/src/ui_service
+WORKDIR /ui_service
 
 # Copy over requirements.txt and install dependencies
 COPY requirements.txt .
