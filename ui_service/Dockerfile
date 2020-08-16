@@ -1,3 +1,5 @@
+ARG ml_service_url
+
 # Use official Docker image for python 3.6.10
 FROM python:3.6.10-slim-buster
 
@@ -24,4 +26,4 @@ RUN pip install -e .
 RUN chmod +x run.sh
 
 EXPOSE 8001
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["./run.sh", "$ml_service_url"]

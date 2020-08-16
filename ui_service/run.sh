@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [ $# -eq 0 ]
+if [ -z "$1" ] # Check if first argument was provided. If not, then the first argument is null.
 then
 	# 'run_app' is the module name, and 'create_app()' is the callable that should be found
 	# in the module. We need quotes around the <module>:<callable> because the callable returns
