@@ -11,15 +11,21 @@ ui_bp = Blueprint('ui_bp', __name__) # create a Blueprint object
 
 def send_prediction_request(sentence):
     try:
-        response = requests.post('http://0.0.0.0:8000/predict', 
+        response = requests.post(current_app.ml_service_url, 
             json={"sentences": [sentence]})
     except requests.exceptions.ConnectionError: # Catch error when ML service is not running
-        return "Could not connect to \'http://0.0.0:8000/predict\'. Check if the ML service is running."
+        msg = f"Could not connect to \'{current_app.ml_service_url}\'. Check if the ML service is running."
+        current_app.logger.error(msg)
+        return msg
     except Exception as e: # Catch all other errors
-        return str(e)
+        msg = str(e)
+        current_app.logger.error(msg)
+        return msg
 
     if response.status_code != 200:
-        return "Error in sending request to ML model endpoint"
+        msg = f"Error in sending request to ML model endpoint at \'{current_app.ml_service_url}\'"
+        current_app.logger.error(msg)
+        return msg
     
     json_data = response.json()
     return str(json_data['pred'][0][0]) # pred is a list with another list inside of it
