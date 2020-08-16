@@ -18,9 +18,10 @@ This directory contains the code for the frontend service of the application, wh
 	2. At the bottom of your Terminal screen, you should see `3 passed`, indicating that the app should work correctly.
 4. Start up the application locally:
 	1. From the root directory, execute `chmod +x run.sh`. This shell script will start up a Gunicorn server that runs the Flask application.
-	2. From the root directory, execute `./run.sh`.
+	2. From the root directory, execute `./run.sh`. An optional second argument can be provided to specify the URL for the _ml-service_ by running `./run.sh <ml-service_URL>`.
+		1. If a no arguments are provided, then the _ui-service_ will assume the _ml-service_ is running on `http://0.0.0.0:8000`.
 	3. The app will start up on [http://0.0.0.0:8001/](http://0.0.0.0:8001/), which is the home page. A user can input a sentence in the provided text box and click _Submit_ to get a sentiment score for the given sentence.
-	4. __IMPORTANT:__ A sentiment score will only be returned if the ML service is running (in a Docker container or just locally). If the ML service is not running, you should see a message that says "Could not connect to 'http://0.0.0:8000/predict'." 
+	4. __IMPORTANT:__ A sentiment score will only be returned if the ML service is running (in a Docker container or just locally). If the ML service is not running, you should see a message that says "Could not connect to 'http://0.0.0:8000/predict'." or the specified URL to the _ml-service_.
 
 
 ## Folder Descriptions
