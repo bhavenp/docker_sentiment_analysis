@@ -1,7 +1,7 @@
 # Use official Docker image for python 3.6.10
 FROM python:3.6.10-slim-buster
 
-WORKDIR /usr/src/ui_service
+WORKDIR /ui_service
 
 # Copy over requirements.txt and install dependencies
 COPY requirements.txt .
@@ -23,5 +23,9 @@ RUN pip install -e .
 
 RUN chmod +x run.sh
 
-EXPOSE 8001
+# Port to expose for the container
+EXPOSE 8001 
+
 ENTRYPOINT ["./run.sh"]
+# Allow users to specify the ml-service URL
+CMD [""] 

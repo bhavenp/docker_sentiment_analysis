@@ -11,7 +11,7 @@ from ui_api import ui_bp
 This is the application factory function.
 Any configuration, registration, and other setup the application needs will happen inside the function, then the application will be returned.
 '''
-def create_app():
+def create_app(ml_service_url="http://0.0.0.0:8000/predict"):
 
 	dir_path = Path(os.path.dirname(os.path.realpath(__file__))) # get the path to the directory in which run_app.py resides
 	logs_path = dir_path / "logs/logging.yaml"
@@ -24,6 +24,7 @@ def create_app():
 	def hello():
 		return "Hello World!"
 
+	app.ml_service_url = ml_service_url # Bind the URL to connect to the ml-service for predictions
 	app.register_blueprint(ui_bp)
 
 	return app

@@ -1,0 +1,20 @@
+version: "3" # Docker compose version I am using
+services:
+  ml_service:
+    image: sentiment_analysis_ml_service # tag to use when generating an image
+    container_name: ml_service # name for the container when it starts up
+    restart: always # Docker will restart container if it exits
+    build: ./ml_service # Build from ui_service directory
+    ports:
+      - "8000:8000"
+  ui_service:
+    image: sentiment_analysis_ui_service
+    container_name: ui_service
+    restart: always
+    build: ./ui_service # Build from ui_service directory
+    depends_on: # Express dependency order. ui_service needs ml_service to be running.
+      - ml_service
+    ports:
+      - "8001:8001" # Specify the port forwarding
+    # Connect to the ml_service by sending request to container name and the open port for that container
+    command: http://ml_service:8000/predict
