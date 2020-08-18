@@ -26,3 +26,5 @@ This repo is for developing a Dockerized sentiment analysis application that I b
 1. Run `docker-compose up` from the root of the repo. This will build images for both services and start them up. The logs for both services will print to your Terminal window.
 2. Go to [http://localhost:8001/](http://localhost:8001/) to use the application.
 
+## Future Development
+1. Add a Docker container running a SQL database that stores user queries. Maybe the last 5 queries can be displayed on page showing the sentiment classification for a user's sentence.
