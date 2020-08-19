@@ -1,6 +1,6 @@
 # Dockerized Sentiment Analysis application
 
-This repo is for developing a Dockerized sentiment analysis application that I built in [this repo](https://github.com/bhavenp/deployable_sentiment_analysis/). Most directories have a `README` file to describe what is going on and for me to take notes. Most of the code is commented so I can remember how things are working and learning lessons learned from this project.
+This repo is for developing a Dockerized sentiment analysis application that I built in [this repo](https://github.com/bhavenp/deployable_sentiment_analysis/). Most directories have a `README` file to describe the purpose of the directory and for me to take notes. Most of the code is commented so I can remember how things are working and to note learning lessons from this project. Feel free to copy any of this code for your own projects with an acknowledgement.
 
 ## Development Steps
 1. Build a Docker container that serves the sentiment analysis model as the _ml_service_. This model should only have to be loaded once when the container starts up.
